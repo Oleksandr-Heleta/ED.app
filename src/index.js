@@ -1,19 +1,27 @@
 import "./scss/style.scss";
 import bootstrap from 'bootstrap';
-// import getCourses from "./script/Api";
+import { getCourses, getCourse } from "./script/Api";
 import RenderCourses from "./script/RenderCourses";
+import RenderCourse from "./script/RenderCourse"
 
 const root = document.getElementById('root');
 
 
 const RenderApp = function (element) {
-    element.innerHTML = RenderCourses();
+    getCourses().then((obj) => {
+        element.innerHTML = RenderCourses(obj.courses);
+    })
+
     root.addEventListener('click', openCourse)
     function openCourse({ target }) {
-        const section = target.closest('section');
+        const section = target.closest('.courses_item');
+
         if (section) {
-            const courseId = section.getAtribute('id');
-            element.innerHTML = RenderCourse(courseId);
+            const courseId = section.id;
+            getCourse(courseId).then(course => {
+                element.innerHTML = RenderCourse(course);
+            })
+
         }
     }
 }

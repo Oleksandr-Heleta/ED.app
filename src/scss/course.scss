@@ -1,0 +1,16 @@
+.course {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    &_video {
+        grid-column: 1;
+    }
+
+    &_information {
+        grid-column: 2;
+    }
+
+    &_list {
+        grid-column: 1/3;
+    }
+}

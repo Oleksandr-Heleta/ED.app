@@ -1,12 +1,12 @@
-import { courses } from "./courses";
+// import { courses } from "./courses";
 
-const RenderCourses = function () {
+const RenderCourses = function (courses) {
     const coursesHtml = courses.reduce((html, course) => {
         const { id, title, description, previewImageLink, rating } = course;
-        return html += ` <section id=${id} class="card mb-3" style="max-width: 780px;">
+        return html += ` <section id=${id} class="card mb-3 courses_item" >
         <div class="row g-0">
             <div class="col-md-4">
-                <img src='${previewImageLink}/cover.webp' class="img-fluid rounded-start" alt="...">
+                <img src='${previewImageLink}/cover.webp' class="img-fluid rounded-start" alt="${title}">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
