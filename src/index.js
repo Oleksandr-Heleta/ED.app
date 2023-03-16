@@ -1,28 +1,15 @@
-import "./scss/style.scss";
-import bootstrap from 'bootstrap';
-import { getCourses, getCourse } from "./script/Api";
-import RenderCourses from "./script/RenderCourses";
-import RenderCourse from "./script/RenderCourse"
-
-const root = document.getElementById('root');
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
 
 
-const RenderApp = function (element) {
-    getCourses().then((obj) => {
-        element.innerHTML = RenderCourses(obj.courses);
-    })
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-    root.addEventListener('click', openCourse)
-    function openCourse({ target }) {
-        const section = target.closest('.courses_item');
 
-        if (section) {
-            const courseId = section.id;
-            getCourse(courseId).then(course => {
-                element.innerHTML = RenderCourse(course);
-            })
 
-        }
-    }
-}
-RenderApp(root)

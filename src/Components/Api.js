@@ -8,24 +8,24 @@ const getCourses = async function () {
             'Content-Type': 'application/ json'
         }
     }).then(resp => {
-        console.log(resp);
+        // console.log(resp);
         return resp;
     });
     return courses.json();
 }
 
 const getCourse = async function (courseId) {
-    let courses = await fetch(url + '/' + courseId + '?token=' + token, {
+    let course = await fetch(url + '/' + courseId + '?token=' + token, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/ json'
         }
     })
         .then(resp => {
-            console.log(resp);
+            // console.log(resp);
             return resp;
         });
-    return courses.json();
+    return course.json();
 }
 
 export { getCourses, getCourse };
