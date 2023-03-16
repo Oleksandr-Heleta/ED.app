@@ -8,8 +8,8 @@ const RenderCourse = function (course) {
     const lessonsHtml = lessons.map((lesson) => RenderLesson(lesson));
     const video = course.meta.courseVideoPreview.link;
 
-    return `<section id=${id} class="course container mb-3">
-        <div class="course_video col-md-4">
+    return `<section id=${id} class="course container ">
+        <div class="course_video ">
             <video muted controls preload="auto" >
                 <source
                     src="${video}"
@@ -17,11 +17,11 @@ const RenderCourse = function (course) {
             </video>
             
         </div>
-        <div class="course_information col-md-8">
+        <div class="course_information">
             <h2>${title}</h2>
             <p>${description}</p>
         </div>
-        <div class="course_list col-md-12">
+        <div class="course_list">
             ${lessonsHtml}
         </div>
     </section>`;

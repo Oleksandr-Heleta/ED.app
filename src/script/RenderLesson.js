@@ -8,7 +8,7 @@ const RenderLesson = function ({
     link,
     previewImageLink,
     meta }) {
-    return ` <section id=${id} class="card mb-3">
+    return ` <section id=${id} class="card">
                 <div class="row g-0">
                     <div class="col-md-4">
                         <img src="${previewImageLink}/${order}.webp" class="img-fluid rounded-start" alt="${title}">
