@@ -12,8 +12,9 @@ function App() {
       <BrowserRouter>
         {/* <Header /> */}
         <Routes>
-          <Route path='/' element={<CoursesList />} />
-          <Route path='/:courseId' element={<Course />} />
+          <Route exact path='/' element={<CoursesList />} />
+          <Route exact path='/pages/:page' element={<CoursesList />} />
+          <Route exact path='/courses/:id' element={<Course />} />
         </Routes>
       </BrowserRouter>
     </>

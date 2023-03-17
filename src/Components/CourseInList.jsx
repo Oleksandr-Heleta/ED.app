@@ -2,28 +2,28 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-function CourseInList({ id, title, description, previewImageLink, rating }) {
+function CourseInList({ id, title, description, previewImageLink, rating, lessonsCount, meta }) {
 
-    // console.log(courseData.courseData);
+    // console.log(meta.skills);
     return (
 
-        <Link to={'/' + id}>
-            <section id={id} className="card mb-3 courses_item" >
-                <div className="row g-0">
-                    <div className="col-md-4">
-                        <img src={previewImageLink + '/cover.webp'} className="img-fluid rounded-start" alt={title} />
-                    </div>
-                    <div className="col-md-8">
-                        <div className="card-body">
-                            <h5 className="card-title">{title}</h5>
-                            <p className="card-text">{description}</p>
-                            <p className="card-text"><small className="text-muted">{rating}</small></p>
-                        </div>
+        <Link to={'/courses/' + id}>
+
+            <li id={id} className="course">
+                <div className="course-image">
+                    <img src={previewImageLink + '/cover.webp'} alt={title} />
+                </div>
+                <div className="course-info">
+                    <h2 className="course-title">{title}</h2>
+                    <p className="course-description">{description}</p>
+                    <div className="course-details">
+                        <span className="course-lessons">Lessons: {lessonsCount}</span>
+                        {meta.skills && <span className="course-skills">Skills: {meta.skills.join(', ')}</span>}
+                        <span className="course-rating">Rate: {rating}</span>
                     </div>
                 </div>
-            </section>
+            </li>
         </Link>
     );
 }
-
 export default CourseInList;

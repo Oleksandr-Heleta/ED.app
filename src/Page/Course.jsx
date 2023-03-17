@@ -4,35 +4,37 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getCourse } from "../Components/Api";
 import Lesson from "../Components/Lesson";
+import VideoPlayer from '../Components/VideoPlayer';
 
 
 function Course() {
     const [course, setCourse] = useState({});
     const [loading, setLoading] = useState(false);
-    const { courseId } = useParams()
+    const { id } = useParams()
     useEffect(() => {
-        console.log(courseId)
-        getCourse(courseId).then(obj => {
+        console.log(id)
+        getCourse(id).then(obj => {
             console.log(obj);
             setCourse(obj); setLoading(true)
         })
     }, [])
-    return (loading && (<section id={course.id} className="course container mb-3">
-        <div className="course_video col-md-4">
-            <video muted controls preload="auto" >
+    return (loading && (<section id={course.id} className="">
+        <div className="course_video ">
+            <VideoPlayer url={course.meta.courseVideoPreview.link} />
+            {/* <video muted controls preload="auto" >
                 <source
                     src={course.meta.courseVideoPreview.link}
                     type="application/x-mpegURL" />
-            </video>
+            </video> */}
 
         </div>
-        <div className="course_information col-md-8">
+        <div className="course_information ">
             <h2>{course.title}</h2>
             <p>{course.description}</p>
         </div>
-        <div className="course_list col-md-12">
+        <ul className="course_list ">
             {course.lessons.map((lesson, index) => (<Lesson {...lesson} key={lesson.id} />))}
-        </div>
+        </ul>
     </section>)
 
     );
