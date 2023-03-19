@@ -26,7 +26,7 @@ function VideoPlayer({ url, muted, autoPlay, play }) {
     }, [url, play]);
 
     return (
-        <video ref={videoRef} controls muted={muted} autoPlay={autoPlay} onPlay={handlePlay} />
+        <video ref={videoRef} controls muted={muted} autoPlay={autoPlay} onPause={handlePlay} />
     );
 }
 

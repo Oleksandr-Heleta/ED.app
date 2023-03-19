@@ -7,10 +7,12 @@ import Lesson from "../Components/Lesson";
 import VideoPlayer from '../Components/VideoPlayer';
 import VideoPopup from '../Components/VideoPopup';
 import Loading from '../Components/Loading';
+import ErrorMessage from '../Components/ErrorMessage';
 
 function Course() {
-    const [course, setCourse] = useState({});
+    const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [err, setErr] = useState(null);
     const [lessonVideoParam, setLessonVideoParam] = useState(null);
     const { id } = useParams()
 
@@ -18,7 +20,6 @@ function Course() {
 
         const lesson = course.lessons.find((el) => el.id === lesonId);
         if (lesson.status === "locked") { return; };
-        console.log(lesson)
         setLessonVideoParam(lesson);
     }
 
@@ -26,34 +27,47 @@ function Course() {
         setLessonVideoParam(null);
     }
     useEffect(() => {
-        console.log(id)
+
         getCourse(id).then(obj => {
-            console.log(obj);
+
             setCourse(obj);
-        }).finally(() => setLoading(true))
-    }, [id])
-    return (<>{
+        }).catch((err) => {
+            console.error(err);
+            setErr(err.message);
+        }
+        ).finally(() => {
+            setLoading(true);
 
-        !loading && <Loading />
+        })
+    }, [])
+    return (
+        <>
+            {
+                !loading && <Loading />
+            }
+            {
+                err && <ErrorMessage err={err} />
+            }
+            {lessonVideoParam && (
+                <VideoPopup lesson={lessonVideoParam} onClick={handleCloseVideo}>
+                    <VideoPlayer url={lessonVideoParam.link} autoPlay={true} play={!!lessonVideoParam} />
+                </VideoPopup>
+            )}
+            {
+                loading && course && (<section id={course.id} className="">
+                    <div className="course-video ">
+                        <VideoPlayer url={course.meta.courseVideoPreview.link} muted={true} autoPlay={true} play={!!lessonVideoParam} />
+                    </div>
+                    <div className="course_information ">
+                        <h2 className='course-title'>{course.title}</h2>
+                        <p className='.course-description'>{course.description}</p>
+                    </div>
+                    <ul className="course_list ">
+                        {course.lessons.map((lesson, index) => (<Lesson {...lesson} key={lesson.id} onClick={() => { handelOpenVideo(lesson.id) }} />))}
+                    </ul>
+                </section>)}
 
-    }
-        {lessonVideoParam && (<VideoPopup lesson={lessonVideoParam} onClick={handleCloseVideo}>
-            <VideoPlayer url={lessonVideoParam.link} play={!!lessonVideoParam} />
-        </VideoPopup>)}
-        {loading && (<section id={course.id} className="">
-            <div className="course_video ">
-                <VideoPlayer url={course.meta.courseVideoPreview.link} muted={true} autoPlay={true} play={!!lessonVideoParam} />
-            </div>
-            <div className="course_information ">
-                <h2 className='course-title'>{course.title}</h2>
-                <p className='.course-description'>{course.description}</p>
-            </div>
-            <ul className="course_list ">
-                {course.lessons.map((lesson, index) => (<Lesson {...lesson} key={lesson.id} onClick={() => { handelOpenVideo(lesson.id) }} />))}
-            </ul>
-        </section>)}
-
-    </>);
+        </>);
 }
 
 export default Course;

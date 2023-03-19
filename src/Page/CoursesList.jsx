@@ -18,17 +18,19 @@ function CoursesList() {
     let { page } = useParams();
 
     page = page ? parseInt(page.replace(/[^\d]+/g, '')) : 1;
+
     useEffect(() => {
         getCourses().then(obj => {
             setCourses(obj.courses);
 
         }).catch(err => {
-            console.erroe(err);
-            setErr(err);
-
+            console.error(err);
+            setErr(err.message);
 
         }).finally(() => setLoad(true))
     }, [])
+
+
     return (<>
         {
             !load && <Loading />
@@ -37,9 +39,7 @@ function CoursesList() {
             err && <ErrorMessage err={err} />
         }
         {
-            courses.length &&
-
-            <>
+            courses.length && <>
                 <ul>
                     {courses.filter((el, index) => (index >= (page * courseCount - courseCount) && index < (page * courseCount))).map((course, index) => <CourseInList {...course} key={course.id} />)}
                 </ul>

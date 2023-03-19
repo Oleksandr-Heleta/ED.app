@@ -102,6 +102,10 @@
 }
 
 @media only screen and (min-width: 1200px) {
+    /* .course-video {
+        width: 70vw;
+    } */
+
     .course-image {
         width: 300px;
     }

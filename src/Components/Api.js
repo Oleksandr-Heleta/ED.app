@@ -2,30 +2,43 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmM2NhZTA3Zi1jNTgx
 const url = 'http://api.wisey.app/api/v1/core/preview-courses';
 
 const getCourses = async function () {
-    let response = await fetch(url + '?token=' + token, {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/ json'
+    try {
+        let response = await fetch(url + '?token=' + token, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/ json'
+            }
+        })
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
         }
-    })
-    if (!response.ok) {
-        throw new Error(response.status);
+        return response.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error.message);
     }
-    return response.json();
+
 }
 
 const getCourse = async function (courseId) {
-    let course = await fetch(url + '/' + courseId + '?token=' + token, {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/ json'
+    try {
+        let response = await fetch(url + '/' + courseId + '?token=' + token, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/ json'
+            }
+        })
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message);
         }
-    })
-        .then(resp => {
-            // console.log(resp);
-            return resp;
-        });
-    return course.json();
+        return response.json();
+    } catch (error) {
+        console.error(error);
+        throw new Error(error.message);
+    }
+
 }
 
 export { getCourses, getCourse };

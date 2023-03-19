@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 function Pagination({ count, page }) {
 
     const btns = new Array(count).fill(0).map((el, index) => { return (index + 1); });
-    console.log(btns);
     return (
-        <div>{
+        <div className="pagination">{
             !((page - 1) === 0) && <Link to={'/pages/' + (page - 1)}>
                 <button>prew</button>
             </Link>}
