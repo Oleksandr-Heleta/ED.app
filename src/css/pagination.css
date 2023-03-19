@@ -2,3 +2,8 @@
     display: flex;
     justify-content: center;
 }
+
+.btn-active {
+    background-color: #00503f;
+    ;
+}

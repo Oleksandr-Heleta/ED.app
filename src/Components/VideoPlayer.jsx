@@ -10,6 +10,22 @@ function VideoPlayer({ url, muted, autoPlay, play }) {
         localStorage.setItem(url, currentTime);
     }
 
+    const handleKey = (event) => {
+        const char = event.key;
+        let speed = videoRef.current.playbackRate;
+        switch (char) {
+            case 'ArrowRight':
+                videoRef.current.playbackRate = (speed < 2) ? (speed + 0.5) : speed;
+                break;
+            case 'ArrowLeft':
+                videoRef.current.playbackRate = (speed > 0) ? (speed - 0.5) : speed;
+                break;
+
+            default:
+                break;
+        }
+    }
+
     useEffect(() => {
         if (Hls.isSupported()) {
             const hls = new Hls();
@@ -21,12 +37,11 @@ function VideoPlayer({ url, muted, autoPlay, play }) {
         videoRef.current.currentTime = localStorage.getItem(url) || 0;
         if (play) {
             videoRef.current.pause();
-            console.log(play);
         }
     }, [url, play]);
 
     return (
-        <video ref={videoRef} controls muted={muted} autoPlay={autoPlay} onPause={handlePlay} />
+        <video ref={videoRef} controls muted={muted} autoPlay={autoPlay} onPause={handlePlay} onKeyDown={handleKey} />
     );
 }
 

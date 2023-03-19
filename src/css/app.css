@@ -9,6 +9,7 @@ body {
 
 ul {
   padding-inline-start: 0px;
+  list-style: none;
 }
 
 a {
@@ -35,4 +36,8 @@ button {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  margin: 1rem;
 }

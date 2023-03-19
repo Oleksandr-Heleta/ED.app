@@ -54,15 +54,15 @@ function Course() {
                 </VideoPopup>
             )}
             {
-                loading && course && (<section id={course.id} className="">
+                loading && course && (<section id={course.id} className="course-grid">
                     <div className="course-video ">
                         <VideoPlayer url={course.meta.courseVideoPreview.link} muted={true} autoPlay={true} play={!!lessonVideoParam} />
                     </div>
-                    <div className="course_information ">
+                    <div className="course-information ">
                         <h2 className='course-title'>{course.title}</h2>
                         <p className='.course-description'>{course.description}</p>
                     </div>
-                    <ul className="course_list ">
+                    <ul className="course-list ">
                         {course.lessons.map((lesson, index) => (<Lesson {...lesson} key={lesson.id} onClick={() => { handelOpenVideo(lesson.id) }} />))}
                     </ul>
                 </section>)}

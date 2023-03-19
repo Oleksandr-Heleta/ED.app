@@ -14,7 +14,7 @@ function Pagination({ count, page }) {
                 btns.map((el, index) => {
                     return (
                         <Link to={'/pages/' + el} key={index}>
-                            <button>{el}</button>
+                            <button className={(page === el) ? 'btn-active' : ''}>{el}</button>
                         </Link>);
 
                 })}
