@@ -58,9 +58,12 @@ function Course() {
                     <div className="course-video ">
                         <VideoPlayer url={course.meta.courseVideoPreview.link} muted={true} autoPlay={true} play={!!lessonVideoParam} />
                     </div>
-                    <div className="course-information ">
+                    <div className="course-information">
                         <h2 className='course-title'>{course.title}</h2>
-                        <p className='.course-description'>{course.description}</p>
+                        <p className='course-description'>{course.description}</p>
+                        <div className="course-details">
+                            {course.meta.skills && <span className="course-skills"><span className="course-rating">Skills:</span> {course.meta.skills.join(', ')}.</span>}
+                        </div>
                     </div>
                     <ul className="course-list ">
                         {course.lessons.map((lesson, index) => (<Lesson {...lesson} key={lesson.id} onClick={() => { handelOpenVideo(lesson.id) }} />))}
