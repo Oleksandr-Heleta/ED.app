@@ -9,10 +9,11 @@ function Lesson({
     type,
     status,
     previewImageLink,
+    onClick
 }) {
 
     return (
-        <li id={id} className="course">
+        <li id={id} className="course" onClick={onClick}>
 
             <div className="course-image">
                 <img src={previewImageLink + '/lesson-' + order + '.webp'} className="course-image" alt={title} />

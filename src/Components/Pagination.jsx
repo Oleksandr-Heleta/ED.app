@@ -8,7 +8,7 @@ function Pagination({ count, page }) {
     return (
         <div>{
             !((page - 1) === 0) && <Link to={'/pages/' + (page - 1)}>
-                <button>prev</button>
+                <button>prew</button>
             </Link>}
 
             {

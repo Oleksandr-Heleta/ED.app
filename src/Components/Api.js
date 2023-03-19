@@ -2,16 +2,16 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmM2NhZTA3Zi1jNTgx
 const url = 'http://api.wisey.app/api/v1/core/preview-courses';
 
 const getCourses = async function () {
-    let courses = await fetch(url + '?token=' + token, {
+    let response = await fetch(url + '?token=' + token, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/ json'
         }
-    }).then(resp => {
-        // console.log(resp);
-        return resp;
-    });
-    return courses.json();
+    })
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    return response.json();
 }
 
 const getCourse = async function (courseId) {

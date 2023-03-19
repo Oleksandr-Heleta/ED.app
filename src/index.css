@@ -1,4 +1,6 @@
 @import './css/course.css';
+@import './css/video_popup.css';
+@import './css/spiner.css';
 
 body {
   margin: 0;
@@ -9,8 +11,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul {
+  padding-inline-start: 0px;
+}
+
 a {
   text-decoration: none;
+}
+
+video {
+  width: 100%;
+  height: 100%;
 }
 
 button {

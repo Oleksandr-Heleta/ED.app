@@ -7,9 +7,10 @@ function CourseInList({ id, title, description, previewImageLink, rating, lesson
     // console.log(meta.skills);
     return (
 
-        <Link to={'/courses/' + id}>
 
-            <li id={id} className="course">
+        <li id={id} className="course">
+
+            <Link to={'/courses/' + id}>
                 <div className="course-image">
                     <img src={previewImageLink + '/cover.webp'} alt={title} />
                 </div>
@@ -22,8 +23,9 @@ function CourseInList({ id, title, description, previewImageLink, rating, lesson
                         <span className="course-rating">Rate: {rating}</span>
                     </div>
                 </div>
-            </li>
-        </Link>
+            </Link>
+        </li>
+
     );
 }
 export default CourseInList;
